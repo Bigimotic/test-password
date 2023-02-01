@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<title>Document</title>
+</head>
+<body>
+	<div>
+  <input type="password" id="password" onkeyup="checkPasswordStrength()">
+  <br><br>
+  <div id="strength-section-1" class="strength-section"></div>
+  <div id="strength-section-2" class="strength-section"></div>
+  <div id="strength-section-3" class="strength-section"></div>
+</div>
+<script>
+	function checkPasswordStrength() {
+  let password = document.getElementById("password").value;
+  let strengthSection1 = document.getElementById("strength-section-1");
+  let strengthSection2 = document.getElementById("strength-section-2");
+  let strengthSection3 = document.getElementById("strength-section-3");
+
+  if (password.length === 0) {
+    strengthSection1.style.backgroundColor = "gray";
+    strengthSection2.style.backgroundColor = "gray";
+    strengthSection3.style.backgroundColor = "gray";
+  } else if (password.length < 8) {
+    strengthSection1.style.backgroundColor = "red";
+    strengthSection2.style.backgroundColor = "red";
+    strengthSection3.style.backgroundColor = "red";
+  } else {
+    let hasLowercase = /[a-z]/.test(password);
+    let hasUppercase = /[A-Z]/.test(password);
+    let hasNumbers = /\d/.test(password);
+    let hasSymbols = /[!@#$%^&*()]/.test(password);
+
+    if (hasLowercase + hasUppercase + hasNumbers + hasSymbols === 1) {
+      strengthSection1.style.backgroundColor = "red";
+      strengthSection2.style.backgroundColor = "gray";
+      strengthSection3.style.backgroundColor = "gray";
+    } else if (hasLowercase + hasUppercase + hasNumbers + hasSymbols === 2) {
+      strengthSection1.style.backgroundColor = "yellow";
+      strengthSection2.style.backgroundColor = "yellow";
+      strengthSection3.style.backgroundColor = "gray";
+    } else {
+      strengthSection1.style.backgroundColor = "green";
+      strengthSection2.style.backgroundColor = "green";
+      strengthSection3.style.backgroundColor = "green";
+    }
+  }
+}
+</script>
+
+
+
+</body>
+</html>
